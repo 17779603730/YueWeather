@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="15dp">
+    <!--天气信息的布局文件
+    activity_weather.xml的子布局-->
+<!--显示当前气温-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/degree_text"
+        android:layout_gravity="end"
+        android:textColor="@color/colorWhite"
+        android:textSize="60sp"/>
+    <!--显示天气概况-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:id="@+id/weather_info_text"
+        android:textColor="@color/colorWhite"
+        android:textSize="20sp"/>
+</LinearLayout>

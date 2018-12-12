@@ -10,7 +10,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
-
+/**
+ * 2018/12/11
+ * 作者：GuoYongze
+ */
 public class Utility {
     /**
      * 解析和处理服务器返回的省级数据

@@ -1,15 +1,14 @@
-package com.example.yueweather;
+package com.example.yueweather.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
-    /**
-     *2018/12/11
-     */
+import com.example.yueweather.*;
+public class WeatherActivity extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_weather);
     }
 }

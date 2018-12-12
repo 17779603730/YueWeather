@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#fff">
+    android:background="@color/colorWhite">
 <!--显示城市的布局文件-->
     <RelativeLayout
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/title_text"
             android:layout_centerInParent="true"
-            android:textColor="@color/colorblue"
+            android:textColor="@color/colorWhite"
             android:textSize="20sp"/>
 
         <Button
