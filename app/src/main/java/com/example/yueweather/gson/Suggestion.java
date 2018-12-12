@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * 作者：GuoYongze
  * 生活建议的实体类
  */
-public class Suggesstion {
+public class Suggestion {
 
     @SerializedName("comf")
     public  Comfort com;
