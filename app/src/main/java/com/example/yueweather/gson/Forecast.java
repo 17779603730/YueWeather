@@ -10,7 +10,7 @@ import java.util.jar.Manifest;
  * 未来每一天天气信息的实体类
  */
 public class Forecast {
-    public String data;
+    public String date;//date是日期；data是数据
     @SerializedName("cond")
     public More more;
     @SerializedName("tmp")

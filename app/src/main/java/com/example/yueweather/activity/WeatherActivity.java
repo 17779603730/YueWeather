@@ -9,11 +9,19 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.yueweather.*;
 import com.example.yueweather.gson.Forecast;
 import com.example.yueweather.gson.Weather;
+import com.example.yueweather.util.HttpUtil;
 import com.example.yueweather.util.Utility;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class WeatherActivity extends AppCompatActivity {
     /**
@@ -38,12 +46,9 @@ public class WeatherActivity extends AppCompatActivity {
         setContentView(R.layout.activity_weather);
         initWidget();//初始化控件
         initData();//本地缓存读取
-    }
-
-    private void initData() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String weatherString = prefs.getString("weather", null);//查询本的缓存天气数据
-        if (weatherString != null){//判断是否存在缓存数据，如果存在就直接解析
+        String weatherString = prefs.getString("weather", null);//从SharedPreferences读取本地的天气数据
+        if (weatherString != null){//如果存在就直接解析
             Weather weather = Utility.handleWeatherResponse(weatherString);
             showWeatherInfo(weather);//把解析到Weather实体类的数据显示出来
         }
@@ -54,11 +59,52 @@ public class WeatherActivity extends AppCompatActivity {
         }
     }
 
+    private void initData() {
+        /**
+         * 从本地查询已缓存的天气数据
+         */
+
+    }
+
     /**
-     * 根据天气id请求城市天气信息
+     * 从服务器中根据天气id请求城市天气信息
      */
     private void requestWeather(String weatherId) {
-        
+        String weatherUrl = "http://guolin.tech/api/weather?cityid=" +weatherId +"&key=a3da6e2f53f24990b7f3998eb3c790c2";
+        HttpUtil.sendOkHttpRequest(weatherUrl, new Callback() {//发出请求
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                final String responseText = response.body().string();//获取服务器返回的数据
+                final Weather weather = Utility.handleWeatherResponse(responseText);//解析到Weather类，并在这里转换成Weather对象
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (weather != null && "ok".equals(weather.status)){//如果天气请求成功
+                            SharedPreferences.Editor editor = PreferenceManager.
+                                    getDefaultSharedPreferences(WeatherActivity.this).edit();//获取SharedPreferences.Editor实例
+                            editor.putString("weather",responseText);//把服务器端的天气数据存储到本地中
+                            editor.apply();
+                            showWeatherInfo(weather);
+                        }
+                        else {
+                            Toast.makeText(WeatherActivity.this, "查询天气失败，请稍后再试！", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(Call call, IOException e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(WeatherActivity.this, "查询天气失败，请稍后再试！", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
+        });
     }
 
     /**
@@ -77,11 +123,11 @@ public class WeatherActivity extends AppCompatActivity {
         for (Forecast forecast : weather.forecastList){//遍历数组，取出未来的天气情况的数据
             View view = LayoutInflater.from(this).inflate(R.layout.forecast_item,
                     mForecastLayout,false);//找到未来天气情况的子项布局，父容器/父布局
-            TextView mDataText = view.findViewById(R.id.date_text);
-            TextView mInfoText = view.findViewById(R.id.info_text);
-            TextView mMaxText = view.findViewById(R.id.max_text);
-            TextView mMinText = view.findViewById(R.id.min_text);
-            mDataText.setText(forecast.data);
+            TextView mDataText = view.findViewById(R.id.date_text);//forecast_item.xml
+            TextView mInfoText = view.findViewById(R.id.info_text);//forecast_item.xml
+            TextView mMaxText = view.findViewById(R.id.max_text);//forecast_item.xml
+            TextView mMinText = view.findViewById(R.id.min_text);//forecast_item.xml
+            mDataText.setText(forecast.date);
             mInfoText.setText(forecast.more.info);
             mMaxText.setText(forecast.tmperature.max);
             mMinText.setText(forecast.tmperature.min);
