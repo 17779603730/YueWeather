@@ -46,7 +46,7 @@
         <!--侧边栏显示的内容-->
         <fragment
             android:name="com.example.yueweather.fragment.ChooseAreaFagment"
-            android:layout_width="match_parent"
+            android:layout_width="150dp"
             android:layout_height="match_parent"
             android:id="@+id/choose_area_fragment"
             android:layout_gravity="start"
