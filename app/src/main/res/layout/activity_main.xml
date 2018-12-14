@@ -5,9 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".activity.MainActivity">
     <!--加载碎片布局，将碎片显示到界面-->
-    <fragment
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/choose_area_fragment"
-        android:name="com.example.yueweather.fragment.ChooseAreaFagment"/>
+    <!--<fragment-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:id="@+id/choose_area_fragment"-->
+        <!--android:name="com.example.yueweather.fragment.ChooseAreaFagment"/>-->
 </FrameLayout>

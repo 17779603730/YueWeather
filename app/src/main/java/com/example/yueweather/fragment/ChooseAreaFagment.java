@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.yueweather.R;
+import com.example.yueweather.activity.MainActivity;
 import com.example.yueweather.activity.WeatherActivity;
 import com.example.yueweather.db.City;
 import com.example.yueweather.db.County;
@@ -117,10 +118,22 @@ public class ChooseAreaFagment extends Fragment {
                  */
                 else if (currentLevel == LEVEL_COUNTY){
                     String weatherId = countyList.get(position).getWeatherId();
-                    Intent intent = new Intent(getActivity(),WeatherActivity.class);
-                    intent.putExtra("weather_id",weatherId);//获取天气的id
-                    startActivity(intent);
-                    getActivity().finish();
+                    /**
+                     * 侧边栏判断与设置
+                     * instanceof关键字判断一个对象是否属于某个类的实例
+                     */
+                    if (getActivity()instanceof MainActivity){//如果属于MainActivity那么处理逻辑不变
+                        Intent intent = new Intent(getActivity(),WeatherActivity.class);
+                        intent.putExtra("weather_id",weatherId);//获取天气的id
+                        startActivity(intent);
+                        getActivity().finish();
+                    }
+                    else if (getActivity() instanceof WeatherActivity){
+                        WeatherActivity activity = (WeatherActivity) getActivity();
+                        activity.mDrawerLayout.closeDrawers();//关闭侧边栏
+                        activity.mSwipeRefreshLayout.setRefreshing(true);//显示下拉刷新进度条
+                        activity.requestWeather(weatherId);//请求新城市的天气信息
+                    }
                 }
             }
         });

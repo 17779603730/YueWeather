@@ -4,25 +4,53 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.WeatherActivity">
-<!--天气显示界面-->
-    <!--把天气相关的信息布局加载到此布局文件中-->
-    <ScrollView
+    <!--图片-->
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/weather_layout"
-        android:scrollbars="none"
-        android:overScrollMode="never">
-
-        <LinearLayout
+        android:id="@+id/bing_pic_img"
+        android:scaleType="centerCrop"/>
+    <!--侧边栏-->
+    <android.support.v4.widget.DrawerLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/drawer_layout">
+        <!--SwipeRefreshLayout嵌套这个就有下拉刷新功能-->
+        <android.support.v4.widget.SwipeRefreshLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <!--把子项布局包括进来-->
-            <include layout="@layout/title"/>
-            <include layout="@layout/now"/>
-            <include layout="@layout/forecast"/>
-            <include layout="@layout/aqi"/>
-            <include layout="@layout/suggestion"/>
-        </LinearLayout>
-    </ScrollView>
+            android:layout_height="match_parent"
+            android:id="@+id/swipe_refresh">
+            <!--天气显示界面-->
+            <!--把天气相关的信息布局加载到此布局文件中-->
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/weather_layout"
+                android:scrollbars="none"
+                android:overScrollMode="never">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fitsSystemWindows="true"
+                    android:orientation="vertical">
+                    <!--把子项布局包括进来-->
+                    <include layout="@layout/title"/>
+                    <include layout="@layout/now"/>
+                    <include layout="@layout/forecast"/>
+                    <include layout="@layout/aqi"/>
+                    <include layout="@layout/suggestion"/>
+                </LinearLayout>
+            </ScrollView>
+        </android.support.v4.widget.SwipeRefreshLayout>
+        <!--侧边栏显示的内容-->
+        <fragment
+            android:name="com.example.yueweather.fragment.ChooseAreaFagment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/choose_area_fragment"
+            android:layout_gravity="start"
+            />
+    </android.support.v4.widget.DrawerLayout>
+
 </FrameLayout>

@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_margin="15dp"
-    android:background="@color/colorTranslucent">
+    android:background="@color/colorBlack">
     <!--空气质量详情的布局文件-->
         <!--activity_weather.xml的子布局-->
 
