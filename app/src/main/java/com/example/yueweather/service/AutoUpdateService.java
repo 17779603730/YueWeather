@@ -42,8 +42,6 @@ public class AutoUpdateService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        WeatherActivity activity = new WeatherActivity();
-        activity.showWeatherInfo(weather);
         //新增---------------------------------------------
         //android8.1前台服务必须要有的
 //        String CHANNEL_ONE_ID = "guo.fox.servicebestpractice";
@@ -71,7 +69,6 @@ public class AutoUpdateService extends Service {
 //                .build();
 //        startForeground(1,notification);
     }
-
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         updateWeather();//更新天气信息

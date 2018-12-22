@@ -26,8 +26,6 @@ import com.example.yueweather.util.HttpUtil;
 import com.example.yueweather.util.Utility;
 
 import org.litepal.LitePal;
-import org.litepal.crud.DataSupport;
-import org.litepal.crud.LitePalSupport;
 
 import java.io.IOException;
 import java.util.ArrayList;

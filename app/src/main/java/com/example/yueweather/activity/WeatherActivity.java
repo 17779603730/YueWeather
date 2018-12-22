@@ -24,7 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.yueweather.*;
+import com.example.yueweather.R;
 import com.example.yueweather.gson.Forecast;
 import com.example.yueweather.gson.Weather;
 import com.example.yueweather.service.AutoUpdateService;
